@@ -1,10 +1,7 @@
 // SPDX-License-Identifier: GPL-3.0
 pragma solidity >=0.7.0 <0.9.0;
-//ragma experimental ABIEncoderV2;
 
 contract Crowdfunding {
-
-    // TODO Criar modificador para operações que somente podem ser feitas pelo dono do projeto, como concluir. 
 
     // Data struct definition
     struct Project {
@@ -59,8 +56,9 @@ contract Crowdfunding {
 
     // Apoiar projeto, transfere dinheiro para o montante do projeto
     function donateToProject(address _project) external payable returns (Donation memory) {
-        require(checkProjectExistence(msg.sender), "Ja existe um processo associado a esse endereco");
-        require(block.timestamp <= projects[msg.sender].end, "Projeto ja expirado, nao e possivel receber dinheiro");
+        require(checkProjectExistence(_project), "Nao existe um processo associado a esse endereco");
+        require(!projects[_project].finished, "Projeto ja finalizado");
+        require(block.timestamp <= projects[_project].end, "Projeto ja expirado, nao e possivel receber dinheiro");
         
         projects[_project].amount += msg.value;
         Donation memory donation = Donation(_project, msg.value);
@@ -76,11 +74,12 @@ contract Crowdfunding {
     // Concluir projeto, quando consegue o dinheiro até o prazo estipulado e encerra o projeto.
     // Somente dono do projeto pode concluir
     function concludeProject() external returns (Project memory){
-        require(checkProjectExistence(msg.sender), "Ja existe um projeto associado a esse endereco");
+        require(checkProjectExistence(msg.sender), "Nao existe um projeto associado a esse endereco");
         require(projects[msg.sender].amount >= projects[msg.sender].target, "Quantidade alvo ainda nao alcancada");
 
         projects[msg.sender].finished = true;
         payable(msg.sender).transfer(projects[msg.sender].amount * 9 / 10);
+        payable(ownerContract).transfer(projects[msg.sender].amount / 10);
 
         emit ConcludeProject(projects[msg.sender].title, projects[msg.sender].amount * 9 / 10);
         return projects[msg.sender];
@@ -94,7 +93,7 @@ contract Crowdfunding {
             refundDonation(_projectOwner);
             projects[_projectOwner].finished = true;
             return true;
-        }else{
+        } else {
             for(uint y = 0; y < projectOwners.length; y++){
                 if(msg.sender == projectOwners[y]){
                     refundDonation(_projectOwner);
@@ -103,19 +102,21 @@ contract Crowdfunding {
                 }
             }
         }
+        require(false, "Voce nao tem preisssao para finalizar esse contrato");
         return false;
     }
 
     // Ver um projeto especifico
     function checkProject(address _project) public view returns (Project memory) {
+        require(checkProjectExistence(msg.sender), "Nao existe um processo associado a esse endereco");
         return projects[_project];
     }
 
-    // Ver projetos, tem que ser capaz de usar paginação
+    // Ver todos os projetos
     function listProjects() public view returns (ProjectDTO[] memory){
         ProjectDTO[] memory projectDTO = new ProjectDTO[](projectOwners.length);
 
-        for(uint i = 0; i < projectOwners.length; i++){
+        for (uint i = 0; i < projectOwners.length; i++) {
             projectDTO[i] = ProjectDTO(projectOwners[i], projects[projectOwners[i]]);
         }
         return projectDTO;
@@ -131,6 +132,7 @@ contract Crowdfunding {
                 }
             }
         }
+        payable(ownerContract).transfer(projects[msg.sender].amount / 10);
     }
 
     // Permite a um usuario ver as doacoes que ele realizou
@@ -139,48 +141,10 @@ contract Crowdfunding {
     }
 
     function checkProjectExistence(address _project) private view returns (bool) {
-        return keccak256(abi.encodePacked(projects[_project].title)) != keccak256(abi.encodePacked(''));
+        for (uint ii = 0; ii < projectOwners.length; ii++)
+            if (projectOwners[ii] == _project)
+                return true;
+        return false;
     }
 
-    /*
-
-    //Testetestetestetestetesteteste
-    struct strProjects {
-        uint sizeOfMapping;
-        mapping(address => Project) projects;
-    }
-    
-    strProjects myProjects;
-    
-
-    function tcreateProject(uint _days, uint _target, string memory _title, string memory _description) external returns (Project memory) {
-        require(!checkProjectExistence(msg.sender), "Ja existe um processo associado a esse endereco");
-        
-        Project memory project = Project(block.timestamp, block.timestamp + _days * 3600 * 24, _target, 0, false, _title, _description);
-
-        //Alterado
-        myProjects.projects[msg.sender] = project;
-        myProjects.sizeOfMapping += 1;
-
-        projectOwners.push(msg.sender);
-
-        emit CreateProject(project);
-        return project;
-    }
-
-    function getMappingValue() public view returns (Project[] memory) {
-        uint[] memory memoryArray = new uint[](myProjects.sizeOfMapping);
-        for(uint i = 0; i < myProjects.sizeOfMapping; i++) {
-            memoryArray[i] = myProjects.projects[i];
-        }
-        return memoryArray;
-    }
-
-    function tcheckProject(address _project) public view returns (Project memory){
-        Project memory project = myProjects.projects[_project];
-        return project;
-    }
-    */
 }
-
-

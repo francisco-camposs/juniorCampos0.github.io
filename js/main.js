@@ -77,9 +77,7 @@ function createProject() {
 	const title = document.getElementById("_title").value;
 	const description = document.getElementById("_description").value;
 
-	return DApp.contracts.CrowdFunding.methods.createProject(days, target, title, description).send({from: DApp.account}).then(result => {
-    console.log(result);
-  });
+	return DApp.contracts.CrowdFunding.methods.createProject(days, target, title, description).send({from: DApp.account});
 }
 
 function donateToProject(){
@@ -89,7 +87,7 @@ function donateToProject(){
 
 // Funções de manipular a tela
 function inicializaInterface() {
-  console.log("É o Jukera!!!!");
+  console.log("Inicializada");
 }
 
 function alterarAba(event){

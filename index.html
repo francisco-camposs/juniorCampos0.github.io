@@ -32,7 +32,7 @@
                     <a class="nav-link" href="#" id="_doacoes" onclick="alterarAba(this)">Minhas doações</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" id="_projetos" onclick="alterarAba(this)">Projetos</a>
+                    <a class="nav-link" href="#" id="_projetos" onclick="alterarAba(this); listaProjetos();">Projetos</a>
                 </li>
               </ul>
             </div>
@@ -81,7 +81,7 @@
                         <h5 class="card-title">Cadastro</h5>
                     </div>
                     <div class="card-body">
-                        <form>
+                        <form id="formCadastro">
                             <div class="form-group">
                                 <label for="_days">Duração do projeto(em dias):</label>
                                 <input type="number" name="_days" id="_days" class="form-control" aria-describedby="Número de dias" placeholder="Limite de dias">
@@ -129,7 +129,7 @@
                                         <input type="text" id="_valor" class="form-control" placeholder="Valor" aria-label="Valor"
                                             aria-describedby="basic-addon2">
                                         <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary" type="submit">Doar</button>
+                                            <button class="btn btn-outline-secondary" type="button">Doar</button>
                                         </div>
                                     </div>
                                 </form>

@@ -77,17 +77,33 @@ function createProject() {
 	const title = document.getElementById("_title").value;
 	const description = document.getElementById("_description").value;
 
-	return DApp.contracts.CrowdFunding.methods.createProject(days, target, title, description).send( {from: DApp.account} ).then(console.log);
+	return DApp.contracts.CrowdFunding.methods.createProject(days, target, title, description).send( {from: DApp.account} ).then(resetForm("formCadastro"));
 }
 
 function donateToProject() {
 	const valor = document.getElementById("_valor").value;
-	return DApp.contracts.CrowdFunding.methods.donateToProject().send({ from:  DApp.account, value: valor })
+
+  //capturar projeto
+
+	return DApp.contracts.CrowdFunding.methods.donateToProject().send({ from:  DApp.account, value: valor });
 }
+
+
+function concludeProject() {
+  return DApp.contracts.CrowdFunding.methods.concludeProject().call({ from:  DApp.account });
+}
+
+ function finishProject() {
+
+  //capturar projeto
+
+   return DApp.contracts.CrowdFunding.methods.finishProject().call({ from:  DApp.account });
+ }
 
 // Funções de manipular a tela
 function inicializaInterface() {
   console.log("Inicializada");
+
 }
 
 function alterarAba(event){
@@ -107,3 +123,11 @@ function alterarAba(event){
 	}
 }
 
+function listaProjetos(){
+  let projects = listProjects();
+  console.log(projects);
+}
+
+function resetForm(id){
+  document.getElementById(id).reset();
+}

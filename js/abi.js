@@ -1,4 +1,4 @@
-let avi = [
+let abi = [
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",

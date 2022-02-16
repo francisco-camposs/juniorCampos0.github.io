@@ -87,17 +87,20 @@ function donateToProject(){
 	return DApp.contracts.CrowdFunding.method.donateToProject().send({ from:  DApp.account, value: valor })
 }
 
-
+// Funções de manipular a tela
 function alterarAba(event){
 	const idList = ["_meuProjeto", "_cadastro", "_doacoes", "_projetos"];
-	const idContenier = ["abaMeuProjetos", "abaCadastro", "abaDoacoes", "abaProjetos"];
-	event.target.id;
+	const idContenier = ["abaMeuProjeto", "abaCadastro", "abaDoacoes", "abaProjetos"];
 
-	for(const i = 0; i < 4; i++){
-		if(event.target.id == idList[i]){
+  console.log(event.id);
+
+	for(let i = 0; i < 4; i++){
+		if(event.id == idList[i]){
 			document.getElementById(idContenier[i]).removeAttribute("hidden");
+      document.getElementById(idContenier[i]).parentNode.classList.add("active");
 		}else {
 			document.getElementById(idContenier[i]).setAttribute("hidden", " ");
+      document.getElementById(idContenier[i]).parentNode.classList.remove("active");
 		}
 	}
 }

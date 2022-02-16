@@ -61,11 +61,11 @@ function checkProject() {
 }
 
 function listProjects() {
-	return DApp.contracts.CrowdFunding.methods.listProjects().call();
+	return DApp.contracts.CrowdFunding.methods.listProjects().call({ from: DApp.account });
 }
 
 function checkDonations() {
-	return DApp.contracts.CrowdFunding.methods.checkDonations().call();
+	return DApp.contracts.CrowdFunding.methods.checkDonations().call({ from: DApp.account });
 }
 
 
@@ -77,12 +77,12 @@ function createProject() {
 	const title = document.getElementById("_title").value;
 	const description = document.getElementById("_description").value;
 
-	return DApp.contracts.CrowdFunding.methods.createProject(days, target, title, description).send( {from: DApp.account} ).then(console.log);
+	return await DApp.contracts.CrowdFunding.methods.createProject(days, target, title, description).send( {from: DApp.account} ).then(console.log);
 }
 
 function donateToProject(){
 	const valor = document.getElementById("_valor").value;
-	return DApp.contracts.CrowdFunding.methods.donateToProject().send({ from:  DApp.account, value: valor })
+	return await DApp.contracts.CrowdFunding.methods.donateToProject().send({ from:  DApp.account, value: valor })
 }
 
 // Funções de manipular a tela

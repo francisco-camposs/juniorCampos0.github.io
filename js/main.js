@@ -54,3 +54,50 @@ const DApp = {
     inicializaInterface();
   },
 };
+
+// *** MÉTODOS (de consulta - view) DO CONTRATO ** //
+
+
+function checkProject() {
+	return DApp.contracts.CrowdFunding.method.checkProject().call( { from: DApp.account } );
+}
+
+function checkProject() {
+	return DApp.contracts.CrowdFunding.method.listProjects().call();
+}
+
+function checkProject() {
+	return DApp.contracts.CrowdFunding.method.checkDonations().call();
+}
+
+
+// *** MÉTODOS (de escrita) DO CONTRATO ** //
+
+function createProject(){
+	const days = document.getElementById("_days").value;
+	const target = document.getElementById("_target").value;
+	const title = document.getElementById("_title").value;
+	const description = document.getElementById("_description").value;
+
+	return DApp.contracts.CrowdFunding.method.createProject(days, target, title, description).call({from: DApp.account});
+}
+
+function donateToProject(){
+	const valor = document.getElementById("_valor").value;
+	return DApp.contracts.CrowdFunding.method.donateToProject().send({ from:  DApp.account, value: valor })
+}
+
+
+function alterarAba(event){
+	const idList = ["_meuProjeto", "_cadastro", "_doacoes", "_projetos"];
+	const idContenier = ["abaMeuProjetos", "abaCadastro", "abaDoacoes", "abaProjetos"];
+	event.target.id;
+
+	for(const i = 0; i < 4; i++){
+		if(event.target.id == idList[i]){
+			document.getElementById(idContenier[i]).removeAttribute("hidden");
+		}else {
+			document.getElementById(idContenier[i]).setAttribute("hidden", " ");
+		}
+	}
+}

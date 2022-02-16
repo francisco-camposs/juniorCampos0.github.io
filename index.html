@@ -81,7 +81,7 @@
                         <h5 class="card-title">Cadastro</h5>
                     </div>
                     <div class="card-body">
-                        <form onSubmit="createProject()">
+                        <form>
                             <div class="form-group">
                                 <label for="_days">Duração do projeto(em dias):</label>
                                 <input type="number" name="_days" id="_days" class="form-control" aria-describedby="Número de dias" placeholder="Limite de dias">
@@ -101,7 +101,7 @@
                                 <label for="_description">Descrição:</label>
                                 <textarea name="_description" id="_description" class="form-control" aria-describedby="Descrição do projeto" placeholder="Descrição do projeto"></textarea>
                             </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
+                            <button type="button" class="btn btn-primary" onclick="createProject()">Submit</button>
                         </form>
                     </div>
                 </div>

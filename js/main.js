@@ -90,6 +90,10 @@ function donateToProject(){
 }
 
 // Funções de manipular a tela
+function inicializaInterface() {
+  console.log("É o Jukera!!!!");
+}
+
 function alterarAba(event){
 	const idList = ["_meuProjeto", "_cadastro", "_doacoes", "_projetos"];
 	const idContenier = ["abaMeuProjeto", "abaCadastro", "abaDoacoes", "abaProjetos"];
@@ -106,3 +110,4 @@ function alterarAba(event){
 		}
 	}
 }
+

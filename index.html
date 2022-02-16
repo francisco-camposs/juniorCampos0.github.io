@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+    <head>
+        <title>Aves São Dinossauros</title>
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    </head>
+
+    <body>
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <span class="navbar-brand" href="#">Aves São Dinossauros</span>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+              <ul class="navbar-nav">
+                <li class="nav-item active">
+                    <a class="nav-link" href="#">Meu projeto</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Cadastro</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Minhas doações</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Projetos</a>
+                </li>
+              </ul>
+            </div>
+        </nav>
+
+        <div class="container mt-4">
+            
+            <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title">Cadastro</h5>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="_days">Duração do projeto(em dias):</label>
+                            <input type="number" name="_days" id="_days" class="form-control" aria-describedby="Número de dias" placeholder="Limite de dias">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="_target">Valor alvo em wei:</label>
+                            <input type="number" name="_target" id="_target" class="form-control" aria-describedby="Valor alvo em wei" placeholder="Valor alvo em wei">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="_title">Título:</label>
+                            <input type="text" name="_title" id="_title" class="form-control" aria-describedby="Título do projeto" placeholder="Título do projeto">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="_description">Descrição:</label>
+                            <textarea name="_description" id="_description" class="form-control" aria-describedby="Descrição do projeto" placeholder="Descrição do projeto"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="card mt-4 mb-4">
+                <div class="card-header">
+                    <h5 class="card-title">Título do projeto</h5>
+                </div>
+                <div class="card-body">
+                    <span class="badge badge-primary">Data final</span>
+                    <span class="badge badge-secondary">Valor alvo</span>
+                    <span class="badge badge-success">Arrecadado</span>
+                    <span class="badge badge-danger">Finalizado</span>
+                    <p class="card-text"></p>
+                        Descrição
+                    </p>
+                </div>
+                <div class="card-footer">
+                    <div class="btn-group mt-0 pt-0 mb-0 pb-0" role="group" aria-label="Basic example">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-4 text-left mt-0 pt-0 mb-0 pb-0">
+                                    <button type="button" class="btn btn-primary">Concluir</button>
+                                </div>
+                                <div class="col-4 text-center mt-0 pt-0 mb-0 pb-0">
+                                    <button type="button" class="btn btn-success">Doação</button>
+                                </div>
+                                <div class="col-4 text-right mt-0 pt-0 mb-0 pb-0">
+                                    <button type="button" class="btn btn-danger">Finalizar</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card mt-4 mb-4">
+                <div class="card-header">
+                    <h5 class="card-title">Doações</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-group">
+                        <li class="list-group-item">Projeto: {}, Valor: {}</li>
+                        <li class="list-group-item">Projeto: {}, Valor: {}</li>
+                        <li class="list-group-item">Projeto: {}, Valor: {}</li>
+                        <li class="list-group-item">Projeto: {}, Valor: {}</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+      </body>
+
+</html>

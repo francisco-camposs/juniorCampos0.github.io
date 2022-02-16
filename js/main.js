@@ -77,7 +77,7 @@ function createProject() {
 	const title = document.getElementById("_title").value;
 	const description = document.getElementById("_description").value;
 
-	return DApp.contracts.CrowdFunding.methods.createProject(days, target, title, description).send({from: DApp.account});
+	return DApp.contracts.CrowdFunding.methods.createProject(days, target, title, description).send( {from: DApp.account} ).then(console.log);
 }
 
 function donateToProject(){

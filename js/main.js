@@ -57,15 +57,15 @@ const DApp = {
 
 // *** MÉTODOS (de consulta - view) DO CONTRATO ** //
 function checkProject() {
-	return DApp.contracts.CrowdFunding.method.checkProject().call( { from: DApp.account } );
+	return DApp.contracts.CrowdFunding.methods.checkProject().call( { from: DApp.account } );
 }
 
 function listProjects() {
-	return DApp.contracts.CrowdFunding.method.listProjects().call();
+	return DApp.contracts.CrowdFunding.methods.listProjects().call();
 }
 
 function checkDonations() {
-	return DApp.contracts.CrowdFunding.method.checkDonations().call();
+	return DApp.contracts.CrowdFunding.methods.checkDonations().call();
 }
 
 
@@ -77,14 +77,14 @@ function createProject() {
 	const title = document.getElementById("_title").value;
 	const description = document.getElementById("_description").value;
 
-	return DApp.contracts.CrowdFunding.method.createProject(days, target, title, description).send({from: DApp.account}).then(result => {
+	return DApp.contracts.CrowdFunding.methods.createProject(days, target, title, description).send({from: DApp.account}).then(result => {
     console.log(result);
   });
 }
 
 function donateToProject(){
 	const valor = document.getElementById("_valor").value;
-	return DApp.contracts.CrowdFunding.method.donateToProject().send({ from:  DApp.account, value: valor })
+	return DApp.contracts.CrowdFunding.methods.donateToProject().send({ from:  DApp.account, value: valor })
 }
 
 // Funções de manipular a tela

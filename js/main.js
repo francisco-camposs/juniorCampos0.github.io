@@ -56,17 +56,15 @@ const DApp = {
 };
 
 // *** MÉTODOS (de consulta - view) DO CONTRATO ** //
-
-
 function checkProject() {
 	return DApp.contracts.CrowdFunding.method.checkProject().call( { from: DApp.account } );
 }
 
-function checkProject() {
+function listProjects() {
 	return DApp.contracts.CrowdFunding.method.listProjects().call();
 }
 
-function checkProject() {
+function checkDonations() {
 	return DApp.contracts.CrowdFunding.method.checkDonations().call();
 }
 
@@ -79,7 +77,7 @@ function createProject(){
 	const title = document.getElementById("_title").value;
 	const description = document.getElementById("_description").value;
 
-	return DApp.contracts.CrowdFunding.method.createProject(days, target, title, description).call({from: DApp.account}).then(result => {
+	return DApp.contracts.CrowdFunding.method.createProject(days, target, title, description).send({from: DApp.account}).then(result => {
     console.log(result);
   });
 }

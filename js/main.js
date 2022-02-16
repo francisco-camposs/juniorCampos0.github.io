@@ -71,7 +71,7 @@ function checkDonations() {
 
 // *** MÉTODOS (de escrita) DO CONTRATO ** //
 
-function createProject(){
+function createProject() {
 	const days = document.getElementById("_days").value;
 	const target = document.getElementById("_target").value;
 	const title = document.getElementById("_title").value;

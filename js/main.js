@@ -1,4 +1,4 @@
-let contractAddress = '0x0c2CB1737A3a3a5F5A8d60eD5e376DA8D91dA6b8';
+let contractAddress = '0x0c2cb1737a3a3a5f5a8d60ed5e376da8d91da6b8';
 
 // Inicializa o objeto DApp
 document.addEventListener("DOMContentLoaded", onDocumentLoad);

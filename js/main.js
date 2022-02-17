@@ -130,6 +130,9 @@ function listarDoacoes(result){
 
     code = `<li class="list-group-item">Projeto: ${ projects[i][0] }, Valor: ${ projects[i][1] } </li>`;
 
+    const parser = new DOMParser();
+    const element = parser.parseFromString(code, "text/html");
+    document.getElementById('listaDoacoes').append(element.body);
   }
 }
 

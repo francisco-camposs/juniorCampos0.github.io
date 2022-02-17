@@ -1,4 +1,4 @@
-let contractAddress = '0xd9145CCE52D386f254917e481eB44e9943F39138'.toLowerCase();
+let contractAddress = '0x4B1b6607AF1aED6EABD2c50934E9749aB00fb5Db'.toLowerCase();
 
 // Inicializa o objeto DApp
 document.addEventListener("DOMContentLoaded", onDocumentLoad);
@@ -57,7 +57,11 @@ const DApp = {
 
 // *** MÉTODOS (de consulta - view) DO CONTRATO ** //
 function checkProject(address) {
-	return DApp.contracts.CrowdFunding.methods.checkProject(address).call( { from: DApp.account } ).then(result => renderMeuProjeto(result));
+	return DApp.contracts.CrowdFunding.methods.checkProject(address).call( { from: DApp.account } )
+  .then(result => renderMeuProjeto(result))
+  .catch((error) => {
+    document.getElementById('abaMeuProjeto').innerText = "Não há projeto associado a essa carteira";
+  });
 }
 
 function listProjects() {
@@ -148,6 +152,10 @@ function listaProjetos(result){
   
 
   let projects = result;
+
+  if (projects.length == 0){
+    document.getElementById('abaProjetos').innerHTML = "Ainda não há projetos cadastrados";
+  }
 
   for(let i = 0; i < projects.length; i++){
 

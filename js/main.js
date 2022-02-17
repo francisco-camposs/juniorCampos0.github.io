@@ -61,7 +61,7 @@ function checkProject() {
 }
 
 function listProjects() {
-	return DApp.contracts.CrowdFunding.methods.listProjects().call({ from: DApp.account });
+	return await DApp.contracts.CrowdFunding.methods.listProjects().call({ from: DApp.account });
 }
 
 function checkDonations() {
@@ -125,7 +125,7 @@ function alterarAba(event){
 
 function listaProjetos(){
 
-  let projects = await listProjects();
+  let projects = listProjects();
 
   for(let i = 0; i < projects.length; i++){
 

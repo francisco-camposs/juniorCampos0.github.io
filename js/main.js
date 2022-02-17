@@ -88,15 +88,26 @@ function donateToProject(event) {
 }
 
 
-function concludeProject() {
-  return DApp.contracts.CrowdFunding.methods.concludeProject().call({ from:  DApp.account });
+function concludeProject(address, tela) {
+  return DApp.contracts.CrowdFunding.methods.concludeProject(address).send({ from:  DApp.account }).then(result => {
+    resetTela(tela)
+    if (tela == 'abaProjeto'){
+      checkProject(address);
+    } else {
+      listProjects();
+    }
+  });
 }
 
- function finishProject() {
-
-  //capturar projeto
-
-   return DApp.contracts.CrowdFunding.methods.finishProject().call({ from:  DApp.account });
+ function finishProject(address, tela) {
+   return DApp.contracts.CrowdFunding.methods.finishProject(address).send({ from:  DApp.account }).then(result => {
+    resetTela(tela)
+    if (tela == 'abaProjeto'){
+      showMeuProjeto();
+    } else {
+      listaProjetos()
+    }
+  });
  }
 
 // Funções de manipular a tela
@@ -166,8 +177,8 @@ function listaProjetos(result){
     code += "</div>\n";
     code += "</div>\n";
     code += "</form>\n";
-    code += "<button type=\"button\" class=\"btn btn-primary\">Concluir</button>\n";
-    code += "<button type=\"button\" class=\"btn btn-danger\">Finalizar</button>\n";
+    code += `<button type=\"button\" class=\"btn btn-primary\" onClick=\"concluirProjeto('${ projects[i][0] }', 'abaProjetos');\">Concluir</button>\n`;
+    code += `<button type=\"button\" class=\"btn btn-danger\" onClick=\"finalizarProjeto('${ projects[i][0] }', 'abaProjetos');\">Finalizar</button>\n`;
     code += "</div>\n";
     code += "</div>\n";
     code += "</div>\n";
@@ -186,6 +197,7 @@ function resetForm(id){
 
 function renderMeuProjeto(result){
   let project =  result;
+  console.log(project);
   var date = new Date(parseInt(project['end']) * 1000);
 
   let code = "";
@@ -213,8 +225,8 @@ function renderMeuProjeto(result){
   code += "</div>\n";
   code += "</div>\n";
   code += "</form>\n";
-  code += "<button type=\"button\" class=\"btn btn-primary\">Concluir</button>\n";
-  code += "<button type=\"button\" class=\"btn btn-danger\">Finalizar</button>\n";
+  code += `<button type=\"button\" class=\"btn btn-primary\" onClick=\"concluirProjeto('${ DApp.account }', 'abaMeuProjeto');\">Concluir</button>\n`;
+  code += `<button type=\"button\" class=\"btn btn-danger\" onClick=\"finalizarProjeto('${ DApp.account }', 'abaMeuProjeto');\">Finalizar</button>\n`;
   code += "</div>\n";
   code += "</div>\n";
   code += "</div>\n";
@@ -232,4 +244,12 @@ function resetTela(elemento) {
 
 function showMeuProjeto(){
   checkProject(DApp.account);
+}
+
+function concluirProjeto(address, tela){
+  concludeProject(address, tela);
+}
+
+function finalizarProjeto(address, tela){
+  finishProject(address, tela);
 }

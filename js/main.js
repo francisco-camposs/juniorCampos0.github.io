@@ -65,7 +65,7 @@ function listProjects() {
 }
 
 function checkDonations() {
-	return DApp.contracts.CrowdFunding.methods.checkDonations().call({ from: DApp.account });
+	return DApp.contracts.CrowdFunding.methods.checkDonations().call({ from: DApp.account }).then(result => { listarDoacoes(result) });
 }
 
 
@@ -121,6 +121,18 @@ function alterarAba(event){
 		}
 	}
 }
+
+function listarDoacoes(result){
+  let projects = result;
+
+  console.log(projects);
+  //for(let i = 0; i < projects.length; i++){
+
+  //  code = `<li class="list-group-item">Projeto: , Valor: </li>`;
+
+  //}
+}
+
 
 function listaProjetos(result){
 

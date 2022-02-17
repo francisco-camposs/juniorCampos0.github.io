@@ -126,11 +126,11 @@ function listarDoacoes(result){
   let projects = result;
 
   console.log(projects);
-  //for(let i = 0; i < projects.length; i++){
+  for(let i = 0; i < projects.length; i++){
 
-  //  code = `<li class="list-group-item">Projeto: , Valor: </li>`;
+    code = `<li class="list-group-item">Projeto: ${ projects[i][0] }, Valor: ${ projects[i][1] } </li>`;
 
-  //}
+  }
 }
 
 

@@ -133,20 +133,20 @@ function listaProjetos(result){
 
   for(let i = 0; i < projects.length; i++){
 
-    var date = new Date(projects[i].end);
+    var date = new Date(projects[i][1][1].end);
 
     let code = "";
     code += "<div class=\"card mt-4 mb-4\">\n";
     code += "<div class=\"card-header\">\n";
-    code += `<h5 class=\"card-title\">${ projects[i].title }</h5>\n`;
+    code += `<h5 class=\"card-title\">${ projects[i][1][5].title }</h5>\n`;
     code += "</div>\n";
     code += "<div class=\"card-body\">\n";
     code += `<span class=\"badge badge-primary\">Data final: ${ date.getTime() }</span>\n`;
-    code += `<span class=\"badge badge-secondary\">Valor alvo: ${ projects[i].target }</span>\n`;
-    code += `<span class=\"badge badge-success\">Arrecadado: ${ projects[i].amount }</span>\n`;
-    code += `<span class=\"badge badge-danger\">Finalizado: ${ projects[i].finished ? 'Finalizado' : 'Aberto' }</span>\n`;
+    code += `<span class=\"badge badge-secondary\">Valor alvo: ${ projects[i][1][2].target }</span>\n`;
+    code += `<span class=\"badge badge-success\">Arrecadado: ${ projects[i][1][3].amount }</span>\n`;
+    code += `<span class=\"badge badge-danger\">Finalizado: ${ projects[i][1][4].finished ? 'Finalizado' : 'Aberto' }</span>\n`;
     code += "<p class=\"card-text\"></p>\n";
-    code += `${ projects[i].description }\n`;
+    code += `${ projects[i][1][6].description }\n`;
     code += "</p>\n";
     code += "</div>\n";
     code += "<div class=\"card-footer\">\n";

@@ -81,8 +81,8 @@ function createProject() {
 }
 
 function donateToProject(event) {
-	const valor = document.getElementById("_valor").value;
   let addressProject = event.id;
+	const valor = document.getElementById(addressProject + "_valor").value;
 
 	return DApp.contracts.CrowdFunding.methods.donateToProject(addressProject).send({ from:  DApp.account, value: valor });
 }
@@ -153,9 +153,9 @@ function listaProjetos(result){
     code += "<div class=\"container\">\n";
     code += "<form>\n";
     code += "<div class=\"input-group mb-3\">\n";
-    code += "<input type=\"text\" id=\"_valor\" class=\"form-control\" placeholder=\"Valor\" aria-label=\"Valor\" aria-describedby=\"basic-addon2\">\n";
+    code += `<input type=\"text\" id=\"${ projects[i][0] }_valor\" class=\"form-control\" placeholder=\"Valor\" aria-label=\"Valor\" aria-describedby=\"basic-addon2\">\n`;
     code += "<div class=\"input-group-append\">\n";
-    code += `<button class=\"btn btn-outline-secondary\" id=\" ${ projects[i][0] } \" type=\"button\" onclick=\"donateToProject(this)\">Doar</button>\n`;
+    code += `<button class=\"btn btn-outline-secondary\" type=\"button\" id=\"${ projects[i][0] }\" onclick=\"donateToProject(this)\">Doar</button>\n`;
     code += "</div>\n";
     code += "</div>\n";
     code += "</form>\n";

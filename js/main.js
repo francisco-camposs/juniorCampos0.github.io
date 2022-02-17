@@ -124,8 +124,51 @@ function alterarAba(event){
 }
 
 function listaProjetos(){
-  let projects = listProjects();
-  console.log(projects);
+
+  let projects =  listProjects();
+
+  for(let i = 0; i < projects.length; i++){
+
+    var date = new Date(projects[i].end);
+
+    let code = "";
+    code += "<div class=\"card mt-4 mb-4\">\n";
+    code += "<div class=\"card-header\">\n";
+    code += `<h5 class=\"card-title\">${ projects[i].title }</h5>\n`;
+    code += "</div>\n";
+    code += "<div class=\"card-body\">\n";
+    code += `<span class=\"badge badge-primary\">Data final: ${ date.getTime() }</span>\n`;
+    code += `<span class=\"badge badge-secondary\">Valor alvo: ${ projects[i].target }</span>\n`;
+    code += `<span class=\"badge badge-success\">Arrecadado: ${ projects[i].amount }</span>\n`;
+    code += `<span class=\"badge badge-danger\">Finalizado: ${ projects[i].finished ? 'Finalizado' : 'Aberto' }</span>\n`;
+    code += "<p class=\"card-text\"></p>\n";
+    code += `${ projects[i].description }\n`;
+    code += "</p>\n";
+    code += "</div>\n";
+    code += "<div class=\"card-footer\">\n";
+    code += "<div class=\"btn-group mt-0 pt-0 mb-0 pb-0\" role=\"group\" aria-label=\"Basic example\">\n";
+    code += "<div class=\"container\">\n";
+    code += "<form>\n";
+    code += "<div class=\"input-group mb-3\">\n";
+    code += "<input type=\"text\" id=\"_valor\" class=\"form-control\" placeholder=\"Valor\" aria-label=\"Valor\" aria-describedby=\"basic-addon2\">\n";
+    code += "<div class=\"input-group-append\">\n";
+    code += "<button class=\"btn btn-outline-secondary\" type=\"button\">Doar</button>\n";
+    code += "</div>\n";
+    code += "</div>\n";
+    code += "</form>\n";
+    code += "<button type=\"button\" class=\"btn btn-primary\">Concluir</button>\n";
+    code += "<button type=\"button\" class=\"btn btn-danger\">Finalizar</button>\n";
+    code += "</div>\n";
+    code += "</div>\n";
+    code += "</div>\n";
+    code += "</div>\n";
+    code += "</div>\n";
+    
+    const parser = new DOMParser();
+    const element = parser.parseFromString(code, "text/html");
+    document.getElementById('abaProjetos').append(element.body);
+
+  }
 }
 
 function resetForm(id){

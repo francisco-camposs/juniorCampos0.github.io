@@ -23,7 +23,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
               <ul class="navbar-nav">
                 <li class="nav-item">
-                    <a class="nav-link"  href="#" id="_meuProjeto" onclick="alterarAba(this)" >Meu projeto</a>
+                    <a class="nav-link"  href="#" id="_meuProjeto" onclick="alterarAba(this); resetTela('abaMeuProjeto'); showMeuProjeto()" >Meu projeto</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="#" id="_cadastro" onclick="alterarAba(this)">Cadastro</a>
@@ -41,38 +41,7 @@
         <div class="container mt-4">
 
             <div id="abaMeuProjeto">
-                <div  class="card mt-4 mb-4">
-                    <div class="card-header">
-                        <h5 class="card-title">Título do projeto</h5>
-                    </div>
-                    <div class="card-body">
-                        <!-- <span class="badge badge-primary">Data final</span>
-                        <span class="badge badge-secondary">Valor alvo</span>
-                        <span class="badge badge-success">Arrecadado</span>
-                        <span class="badge badge-danger">Finalizado</span>
-                        <p class="card-text"></p>
-                            Descrição
-                        </p> -->
-                        <h3>Em construção</h3>
-                    </div>
-                    <!-- <div class="card-footer">
-                        <div class="btn-group mt-0 pt-0 mb-0 pb-0" role="group" aria-label="Basic example">
-                            <div class="container">
-                                <form>
-                                    <div class="input-group mb-3">
-                                        <input type="text" id="_valor" class="form-control" placeholder="Valor" aria-label="Valor"
-                                            aria-describedby="basic-addon2">
-                                        <div class="input-group-append">
-                                            <button class="btn btn-outline-secondary" type="submit">Doar</button>
-                                        </div>
-                                    </div>
-                                </form>
-                                <button type="button" class="btn btn-primary">Concluir</button>
-                                <button type="button" class="btn btn-danger">Finalizar</button>
-                            </div>
-                        </div>
-                    </div> -->
-                </div>
+                
             </div>
             
             <div id="abaCadastro" hidden>

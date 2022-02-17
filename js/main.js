@@ -56,8 +56,8 @@ const DApp = {
 };
 
 // *** MÉTODOS (de consulta - view) DO CONTRATO ** //
-function checkProject() {
-	return DApp.contracts.CrowdFunding.methods.checkProject().call( { from: DApp.account } );
+function checkProject(address) {
+	return DApp.contracts.CrowdFunding.methods.checkProject(address).call( { from: DApp.account } ).then(result => renderMeuProjeto(result));
 }
 
 function listProjects() {
@@ -101,15 +101,12 @@ function concludeProject() {
 
 // Funções de manipular a tela
 function inicializaInterface() {
-  console.log("Inicializada");
-
+  showMeuProjeto();
 }
 
 function alterarAba(event){
 	const idList = ["_meuProjeto", "_cadastro", "_doacoes", "_projetos"];
 	const idContenier = ["abaMeuProjeto", "abaCadastro", "abaDoacoes", "abaProjetos"];
-
-  console.log(event.id);
 
 	for(let i = 0; i < 4; i++){
 		if(event.id == idList[i]){
@@ -125,7 +122,6 @@ function alterarAba(event){
 function listarDoacoes(result){
   let projects = result;
 
-  console.log(projects);
   for(let i = 0; i < projects.length; i++){
 
     code = `<li class="list-group-item">Projeto: ${ projects[i][0] }, Valor: ${ projects[i][1] } </li>`;
@@ -136,18 +132,14 @@ function listarDoacoes(result){
   }
 }
 
-
 function listaProjetos(result){
 
 
   let projects = result;
-  //listProjects().then(result => {projects = result});
-
-  console.log(projects);
 
   for(let i = 0; i < projects.length; i++){
 
-    var date = new Date(projects[i][1][1]);
+    var date = new Date(parseInt(projects[i][1][1]) * 1000);
 
     let code = "";
     code += "<div class=\"card mt-4 mb-4\">\n";
@@ -155,7 +147,7 @@ function listaProjetos(result){
     code += `<h5 class=\"card-title\">${ projects[i][1][5] }</h5>\n`;
     code += "</div>\n";
     code += "<div class=\"card-body\">\n";
-    code += `<span class=\"badge badge-primary\">Data final: ${ date.getTime() }</span>\n`;
+    code += `<span class=\"badge badge-primary\">Data final: ${ date.toLocaleDateString('pt-BR') }</span>\n`;
     code += `<span class=\"badge badge-secondary\">Valor alvo: ${ projects[i][1][2]}</span>\n`;
     code += `<span class=\"badge badge-success\">Arrecadado: ${ projects[i][1][3] }</span>\n`;
     code += `<span class=\"badge badge-danger\">Finalizado: ${ projects[i][1][4] ? 'Finalizado' : 'Aberto' }</span>\n`;
@@ -185,10 +177,59 @@ function listaProjetos(result){
     const parser = new DOMParser();
     const element = parser.parseFromString(code, "text/html");
     document.getElementById('abaProjetos').append(element.body);
-
   }
 }
 
 function resetForm(id){
   document.getElementById(id).reset();
+}
+
+function renderMeuProjeto(result){
+  let project =  result;
+  var date = new Date(parseInt(project['end']) * 1000);
+
+  let code = "";
+  code += "<div class=\"card mt-4 mb-4\">\n";
+  code += "<div class=\"card-header\">\n";
+  code += `<h5 class=\"card-title\">${ project['title'] }</h5>\n`;
+  code += "</div>\n";
+  code += "<div class=\"card-body\">\n";
+  code += `<span class=\"badge badge-primary\">Data final: ${ date.toLocaleDateString('pt-BR') }</span>\n`;
+  code += `<span class=\"badge badge-secondary\">Valor alvo: ${ project['target']}</span>\n`;
+  code += `<span class=\"badge badge-success\">Arrecadado: ${ project['amount'] }</span>\n`;
+  code += `<span class=\"badge badge-danger\">Finalizado: ${ project['finished'] ? 'Finalizado' : 'Aberto' }</span>\n`;
+  code += "<p class=\"card-text\"></p>\n";
+  code += `${ project['description'] }\n`;
+  code += "</p>\n";
+  code += "</div>\n";
+  code += "<div class=\"card-footer\">\n";
+  code += "<div class=\"btn-group mt-0 pt-0 mb-0 pb-0\" role=\"group\" aria-label=\"Basic example\">\n";
+  code += "<div class=\"container\">\n";
+  code += "<form>\n";
+  code += "<div class=\"input-group mb-3\">\n";
+  code += `<input type=\"text\" id=\"${ DApp.account }_valor\" class=\"form-control\" placeholder=\"Valor\" aria-label=\"Valor\" aria-describedby=\"basic-addon2\">\n`;
+  code += "<div class=\"input-group-append\">\n";
+  code += `<button class=\"btn btn-outline-secondary\" type=\"button\" id=\"${ DApp.account }\" onclick=\"donateToProject(this); document.getElementById('${ DApp.account }_valor').value = ''\">Doar</button>\n`;
+  code += "</div>\n";
+  code += "</div>\n";
+  code += "</form>\n";
+  code += "<button type=\"button\" class=\"btn btn-primary\">Concluir</button>\n";
+  code += "<button type=\"button\" class=\"btn btn-danger\">Finalizar</button>\n";
+  code += "</div>\n";
+  code += "</div>\n";
+  code += "</div>\n";
+  code += "</div>\n";
+  code += "</div>\n";
+  
+  const parser = new DOMParser();
+  const element = parser.parseFromString(code, "text/html");
+  document.getElementById('abaMeuProjeto').append(element.body);
+}
+
+function resetTela(elemento) {
+  document.getElementById(elemento).innerHTML = "";
+}
+
+function showMeuProjeto(){
+  checkProject(DApp.account);
 }

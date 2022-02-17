@@ -1,4 +1,4 @@
-let contractAddress = '0x0c2cb1737a3a3a5f5a8d60ed5e376da8d91da6b8';
+let contractAddress = '0xd9145CCE52D386f254917e481eB44e9943F39138'.toLowerCase();
 
 // Inicializa o objeto DApp
 document.addEventListener("DOMContentLoaded", onDocumentLoad);
@@ -145,6 +145,7 @@ function listarDoacoes(result){
 
 function listaProjetos(result){
 
+  
 
   let projects = result;
 

@@ -89,13 +89,13 @@ contract Crowdfunding {
     // Devolve 90% do dinheiro dos doadores
     // Somente dono do projeto ou dono do contrato pode chamar
     function finishProject(address _projectOwner) public payable returns (bool) {
-        if(msg.sender == ownerContract){
-            refundDonation(_projectOwner);
-            projects[_projectOwner].finished = true;
-            return true;
-        } else {
-            for(uint y = 0; y < projectOwners.length; y++){
-                if(msg.sender == projectOwners[y]){
+        if(checkProjectExistence(_projectOwner)){
+            if(msg.sender == ownerContract){
+                refundDonation(_projectOwner);
+                projects[_projectOwner].finished = true;
+                return true;
+            } else {
+                if(msg.sender == _projectOwner){
                     refundDonation(_projectOwner);
                     projects[_projectOwner].finished = true;
                     return true;

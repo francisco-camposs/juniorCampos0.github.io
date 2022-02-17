@@ -1,4 +1,4 @@
-let abi = [
+[
 	{
 		"inputs": [],
 		"stateMutability": "nonpayable",

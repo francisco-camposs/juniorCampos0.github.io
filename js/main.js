@@ -60,7 +60,7 @@ function checkProject() {
 	return DApp.contracts.CrowdFunding.methods.checkProject().call( { from: DApp.account } );
 }
 
-function listProjects() {
+async function listProjects() {
 	return await DApp.contracts.CrowdFunding.methods.listProjects().call({ from: DApp.account });
 }
 

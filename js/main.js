@@ -170,7 +170,7 @@ function listaProjetos(result){
     code += "<div class=\"input-group mb-3\">\n";
     code += `<input type=\"text\" id=\"${ projects[i][0] }_valor\" class=\"form-control\" placeholder=\"Valor\" aria-label=\"Valor\" aria-describedby=\"basic-addon2\">\n`;
     code += "<div class=\"input-group-append\">\n";
-    code += `<button class=\"btn btn-outline-secondary\" type=\"button\" id=\"${ projects[i][0] }\" onclick=\"donateToProject(this)\">Doar</button>\n`;
+    code += `<button class=\"btn btn-outline-secondary\" type=\"button\" id=\"${ projects[i][0] }\" onclick=\"donateToProject(this); document.getElementById('${ projects[i][0] }_valor').value = ''\">Doar</button>\n`;
     code += "</div>\n";
     code += "</div>\n";
     code += "</form>\n";

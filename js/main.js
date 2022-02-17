@@ -125,7 +125,9 @@ function alterarAba(event){
 
 function listaProjetos(){
 
-  let projects = listProjects();
+
+  let projects = null;
+  listProjects().then(result => {projects = result});
 
   console.log(projects);
 

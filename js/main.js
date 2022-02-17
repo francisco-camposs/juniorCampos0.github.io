@@ -125,7 +125,7 @@ function alterarAba(event){
 
 function listaProjetos(){
 
-  let projects =  listProjects();
+  let projects = await listProjects();
 
   for(let i = 0; i < projects.length; i++){
 
